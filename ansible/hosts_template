@@ -1,2 +1,0 @@
-[testdeployment]
-HostIP ansible_host=HostIP

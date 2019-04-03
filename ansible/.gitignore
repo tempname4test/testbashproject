@@ -1,4 +1,3 @@
 *.retry
-hosts
 buffer/ssl_certificate
 temp.yml

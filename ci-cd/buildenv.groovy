@@ -23,11 +23,11 @@ node ('jenkins-master'){
         url: "git@github.com:tempname4test/testbashproject.git" 
     }
 
-    stage ("add server ip to ansible hosts file") { 
-        dir("ansible"){
-            sh "./create_hosts.sh $server_ip " 
-        } 
-    }
+    // stage ("add server ip to ansible hosts file") { 
+    //     dir("ansible"){
+    //         sh "./create_hosts.sh $server_ip " 
+    //     } 
+    // }
     stage ("build and run container") { 
         dir("ansible"){
             sh """ eval `ssh-agent -s` && ssh-add ~/.ssh/tmp_key && ansible-playbook -i hosts ./test_configuration.yml  """  
