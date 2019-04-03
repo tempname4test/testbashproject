@@ -25,8 +25,8 @@ node ('jenkins-master'){
 
     stage ("add server ip to ansible hosts file") { 
         dir("ansible"){
-            sh """ echo '[testdeployment]' > ansible/hosts""" 
-            sh """ echo testhostname ansible_host=${server_ip} >> ansible/hosts"""
+            sh """ echo '[testdeployment]' > hosts""" 
+            sh """ echo testhostname ansible_host=${server_ip} >> hosts"""
         } 
     }
     stage ("build and run container") { 
