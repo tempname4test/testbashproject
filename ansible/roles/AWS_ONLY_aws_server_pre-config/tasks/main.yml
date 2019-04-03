@@ -1,0 +1,17 @@
+- name: update apt-get cache
+  shell: "ssh -o StrictHostKeyChecking=no ubuntu@{{ ansible_host }} sudo /usr/bin/apt-get update  "
+  delegate_to: 127.0.0.1
+
+      
+- name: Install python
+  shell: "ssh -o StrictHostKeyChecking=no ubuntu@{{ ansible_host }} sudo /usr/bin/apt-get install -y python  "
+  delegate_to: 127.0.0.1
+
+- name: Set authorized key for "root" user 
+  become: true
+  become_method: sudo
+  authorized_key:
+    user: root
+    state: present
+    manage_dir: yes
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

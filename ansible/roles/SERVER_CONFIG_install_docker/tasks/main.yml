@@ -1,0 +1,32 @@
+- name: check if docker is installed
+  shell: docker run --rm hello-world | grep 'Hello from Docker' | wc -l
+  register: if_docker_installed
+  ignore_errors: yes
+
+- name: check if docker is installed
+  debug: var=if_docker_installed.stdout
+
+- name:  add Docker repo  key
+  become: true
+  become_method: sudo
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+  when: if_docker_installed.stdout != "1"
+
+- name: add Docker repo 
+  shell: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  when: if_docker_installed.stdout != "1" 
+
+- name: install docker
+  shell: apt update && apt install -y docker-ce=18.06.1~ce~3-0~ubuntu
+  when: if_docker_installed.stdout != "1"
+
+- name: enable docker
+  become: true
+  shell: systemctl enable docker
+  when: if_docker_installed.stdout != "1" 
+
+- name: start docker
+  become: true
+  shell: systemctl restart docker
+
+

@@ -1,0 +1,11 @@
+- name: rsync data to the remote server
+  shell: rsync -avzPh ../* /root/testci/
+  delegate_to: 127.0.0.1
+
+- name: build docker
+  shell: docker build -t testnginx .
+  args:
+    chdir: /root/testci/
+
+- name: run container 
+  shell: docker run --rm -d -p 80:80 testnginx
