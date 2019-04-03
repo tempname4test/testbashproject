@@ -11,6 +11,16 @@ properties([
 ])
 
 node ('jenkins-master'){
-    // try {
-        echo "clone CICD repo and latest changes"
+    stage ("add server ip to ansible hosts file") { 
+        sh """ echo '[testdeployment]' > ansible/hosts""" 
+        sh """ echo testhostname ansible_host=${server_ip} >> ansible/hosts""" 
+    }
+    stage ("build and run container") { 
+        dir("ansible"){
+            sh """ ansible-playbook -i hosts ./test_configuration.yml """ 
+        }
+    }
+    stage ("test") { 
+        sh " curl ${server_ip}" 
+    }
 }
