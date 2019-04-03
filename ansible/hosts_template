@@ -1,5 +1,5 @@
 
 [testdeployment]
-TestDeployments ansible_host=HostIP
+HostIP ansible_host=HostIP
 
 [testdeployment:vars]

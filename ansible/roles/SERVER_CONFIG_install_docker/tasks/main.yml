@@ -6,10 +6,11 @@
 # - name: check if docker is installed
 #   debug: var=if_docker_installed.stdout
 
-- name:  add Docker repo  key
-  become: true
-  become_method: sudo
+- name: add Docker repo  key
   shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+  # become: true
+  # become_method: sudo
 
 - name: add Docker repo 
   shell: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
