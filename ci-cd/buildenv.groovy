@@ -31,7 +31,7 @@ node ('jenkins-master'){
     }
     stage ("build and run container") { 
         dir("ansible"){
-            sh """ ansible-playbook -i hosts ./test_configuration.yml """ 
+            sh """ ansible-playbook -i hosts ./test_configuration.yml --key-file "~/.ssh/tmp_key """  
         }
     }
     stage ("test") { 
