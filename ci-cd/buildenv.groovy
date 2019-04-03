@@ -31,8 +31,7 @@ node ('jenkins-master'){
     }
     stage ("build and run container") { 
         dir("ansible"){
-            sh "eval `ssh-agent -s` && ssh-add ~/.ssh/tmp_key"
-            sh """ ansible-playbook -i hosts ./test_configuration.yml  """  
+            sh """ eval `ssh-agent -s` && ssh-add ~/.ssh/tmp_key && ansible-playbook -i hosts ./test_configuration.yml  """  
         }
     }
     stage ("test") { 
