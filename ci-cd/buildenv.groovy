@@ -5,7 +5,7 @@ properties([
         parameters([
             string(
                 name: 'server_ip',
-                defaultValue: '3.19.53.148',
+                // defaultValue: '3.19.53.148',
                 description: 'fresh ubuntu 16 ip',
             ),
             string(
