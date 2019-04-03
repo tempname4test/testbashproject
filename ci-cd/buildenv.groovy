@@ -34,6 +34,6 @@ node ('jenkins-master'){
         }
     }
     stage ("test") { 
-        sh " curl ${server_ip}" 
+        sh "curl ${server_ip}" 
     }
 }
