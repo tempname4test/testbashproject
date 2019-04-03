@@ -1,5 +1,5 @@
 - name: rsync data to the remote server
-  local_action: shell  rsync -avzPh  --rsh="ssh -o StrictHostKeyChecking=no" ../* root@{{ ansible_host }}:/root/testci/
+  local_action: shell  rsync -avzPh  -e "ssh -o StrictHostKeyChecking=no" ../* root@{{ ansible_host }}:/root/testci/
 
 - name: build docker no cache
   shell: docker build -t testnginx . --no-cache
