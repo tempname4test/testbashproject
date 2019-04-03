@@ -1,11 +1,11 @@
 
-#  - hosts: testdeployment
-#    connection: paramiko
-#    gather_facts: no
-#    vars:
-#       ansible_user: ubuntu
-#    roles:
-#     - AWS_ONLY_aws_server_pre-config
+ - hosts: testdeployment
+   connection: paramiko
+   gather_facts: no
+   vars:
+      ansible_user: ubuntu
+   roles:
+    - AWS_ONLY_aws_server_pre-config
 
  - hosts: testdeployment
    connection: paramiko
@@ -13,6 +13,6 @@
    vars:
        ansible_user: root
    roles:
-   #  - SERVER_CONFIG_install_docker
+    - SERVER_CONFIG_install_docker
     - install_testcontainer
 
