@@ -1,11 +1,9 @@
 - name: update apt-get cache
-  shell: "ssh -o StrictHostKeyChecking=no ubuntu@{{ ansible_host }} sudo /usr/bin/apt-get update  "
-  delegate_to: 127.0.0.1
+  local_action:  shell ssh -o StrictHostKeyChecking=no ubuntu@{{ ansible_host }} sudo /usr/bin/apt-get update  
 
       
 - name: Install python
-  shell: "ssh -o StrictHostKeyChecking=no ubuntu@{{ ansible_host }} sudo /usr/bin/apt-get install -y python  "
-  delegate_to: 127.0.0.1
+  local_action:  shell ssh -o StrictHostKeyChecking=no ubuntu@{{ ansible_host }} sudo /usr/bin/apt-get install -y python  
 
 - name: Set authorized key for "root" user 
   become: true

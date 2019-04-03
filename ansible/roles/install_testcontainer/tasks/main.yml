@@ -1,11 +1,20 @@
 - name: rsync data to the remote server
-  shell: rsync -avzPh ../* /root/testci/
-  delegate_to: 127.0.0.1
+  local_action: shell rsync -avzPh ../* root@{{ ansible_host }}:/root/testci/
 
-- name: build docker
-  shell: docker build -t testnginx .
+- name: build docker no cache
+  shell: docker build -t testnginx . --no-cache
   args:
     chdir: /root/testci/
 
+- name: stop old container
+  shell: docker ps | grep testnginx| cut -d ' ' -f 1 |  while read line; do docker stop $line ; docker rm $lien ; echo done; done
+
 - name: run container 
-  shell: docker run --rm -d -p 80:80 testnginx
+  shell: docker run --rm -d -p 80:80 --name testnginx testnginx
+
+- name: test if container is up and running
+  local_action: shell sleep 10; curl {{ ansible_host }}
+  register: test
+
+- name: check if container is up and running
+  debug: var=test.stdout
