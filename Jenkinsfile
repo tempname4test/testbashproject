@@ -1,4 +1,9 @@
 node {
+  agent {
+      docker {
+          image 'docker:latest'
+      }
+  }
   stage('Build image') {
     app = docker.build("linnovate-devops/test2")
   }
